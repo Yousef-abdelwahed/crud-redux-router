@@ -1,6 +1,21 @@
 import React from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
-export const PostList = () => {
+export const PostList = ({ data, loading, err }) => {
+
+  
+  const records = data.map((el, index) => (
+    <tr key={el.id}>
+      <td>#{++index}</td>
+      <td>{el.title}</td>
+      <td>
+        <ButtonGroup aria-label="Basic example">
+          <Button variant="success">Edit</Button>
+          <Button variant="danger">Delete</Button>
+        </ButtonGroup>
+      </td>
+    </tr>
+  ));
+
   return (
     <>
       <Table striped bordered hover>
@@ -12,16 +27,17 @@ export const PostList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>#1</td>
-            <td>this is title 1</td>
-            <td>
-              <ButtonGroup aria-label="Basic example">
-                <Button variant="success">Edit</Button>
-                <Button variant="danger">Delete</Button>
-              </ButtonGroup>
-            </td>
-          </tr>
+          {loading ? (
+            <tr>
+              <td colSpan={3}>loading please wait...</td>
+            </tr>
+          ) : err ? (
+            <tr>
+              <td colSpan={3}>{err}</td>
+            </tr>
+          ) : (
+            records
+          )}
         </tbody>
       </Table>
     </>

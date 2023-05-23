@@ -17,9 +17,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-    // loader: ({ params }) => {
-    //   console.log(typeof params.id === Number);
-    // },
+   
 
     children: [
       { index: true, element: <Index /> },
@@ -32,7 +30,6 @@ const router = createBrowserRouter([
         element: <Details />,
         loader: ({ params }) => {
           if (isNaN(params.id)) {
-            console.log(params);
             throw new Response("Bad request", {
               statusText: "Please make sure to insert correct post ID",
               status: 400,
@@ -45,9 +42,7 @@ const router = createBrowserRouter([
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router}></RouterProvider>
+  </Provider>
 );
