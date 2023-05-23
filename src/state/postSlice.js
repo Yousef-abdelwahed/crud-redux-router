@@ -14,7 +14,18 @@ export const fetchPosts = createAsyncThunk(
     }
   }
 );
-
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (id, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      await fetch(`http://localhost:3005/posts/${id}`, { method: "DELETE" });
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 //
 const initialState = { records: [], loading: false, error: null };
 const postSlice = createSlice({
@@ -34,6 +45,11 @@ const postSlice = createSlice({
     [fetchPosts.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    //Delet
+    [deletePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.records = state.records.filter((el) => el.id !== action.payload);
     },
   },
 });

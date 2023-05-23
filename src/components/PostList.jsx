@@ -2,7 +2,7 @@ import React from "react";
 // import PostListItem from "./PostListItem";
 import { Table } from "react-bootstrap";
 
-const PostList = ({ data, children }) => {
+const PostList = ({ children }) => {
   return (
     <Table striped bordered hover>
       <thead>
