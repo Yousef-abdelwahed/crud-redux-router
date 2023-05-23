@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import PostList from "./PostList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../state/postSlice";
 import Loading from "./Loading";
+import PostList from "./PostList";
+import PostListItem from "./PostListItem";
 const Index = () => {
   const dispatch = useDispatch();
   const { records, loading, error } = useSelector((state) => state.posts);
@@ -12,7 +13,10 @@ const Index = () => {
   //
   return (
     <Loading loading={loading} error={error}>
-      <PostList data={records} />;
+      <PostList>
+        <PostListItem data={records} />
+      </PostList>
+      ;
     </Loading>
   );
 };

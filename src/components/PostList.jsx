@@ -1,8 +1,8 @@
 import React from "react";
-import PostListItem from "./PostListItem";
+// import PostListItem from "./PostListItem";
 import { Table } from "react-bootstrap";
 
-const PostList = ({ data }) => {
+const PostList = ({ data, children }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -13,7 +13,8 @@ const PostList = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        <PostListItem data={data} />
+        {/* <PostListItem data={data} /> */}
+        {children}
       </tbody>
     </Table>
   );
