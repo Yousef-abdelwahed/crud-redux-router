@@ -15,7 +15,6 @@ const Index = () => {
     (id) => dispatch(deletePost(id)),
     [dispatch]
   );
-  console.log(deleteRecords);
   return (
     <Loading loading={loading} error={error}>
       <PostList>

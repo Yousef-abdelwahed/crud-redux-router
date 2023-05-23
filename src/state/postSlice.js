@@ -47,9 +47,17 @@ const postSlice = createSlice({
       state.error = action.payload;
     },
     //Delet
+    [deletePost.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
     [deletePost.fulfilled]: (state, action) => {
       state.loading = false;
       state.records = state.records.filter((el) => el.id !== action.payload);
+    },
+    [deletePost.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });
