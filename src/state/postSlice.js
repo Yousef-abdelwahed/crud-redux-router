@@ -52,7 +52,7 @@ export const insertPost = createAsyncThunk(
     }
   }
 );
-const initialState = { records: [], loading: false, error: null };
+const initialState = { records: [], loading: true, error: null };
 const postSlice = createSlice({
   name: "posts",
   initialState,

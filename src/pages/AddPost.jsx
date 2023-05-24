@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { insertPost } from "../state/postSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //useNavigate
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const AddPost = () => {
   const navigate = useNavigate();
   //states
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const { loading, error } = useSelector((state) => state.posts);
   //disption
   const dispatch = useDispatch();
   //navigate when submt
@@ -49,7 +51,9 @@ const AddPost = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Loading loading={loading} error={error}></Loading>
+
+      <Button variant="primary" type="submit" disabled={loading}>
         Submit
       </Button>
     </Form>

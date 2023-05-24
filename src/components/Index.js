@@ -20,7 +20,6 @@ const Index = () => {
       <PostList>
         <PostListItem data={records} deleteRecords={deleteRecords} />
       </PostList>
-      ;
     </Loading>
   );
 };
