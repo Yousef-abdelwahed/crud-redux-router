@@ -31,7 +31,10 @@ export const deletePost = createAsyncThunk(
 export const insertPost = createAsyncThunk(
   "posts/insertPost",
   async (item, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
+    const { rejectWithValue, getState } = thunkAPI;
+    const auth = getState();
+    console.log(item);
+    item.userId = auth.id;
     try {
       const response = await fetch(`http://localhost:3005/posts`, {
         method: "POST",
