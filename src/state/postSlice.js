@@ -6,7 +6,9 @@ export const fetchPosts = createAsyncThunk(
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const response = await fetch("http://localhost:3005/posts");
+      const response = await fetch("http://localhost:3005/posts", {
+        method: "GET",
+      });
       const data = await response.json();
       return data;
     } catch (err) {
@@ -32,16 +34,15 @@ export const insertPost = createAsyncThunk(
   "posts/insertPost",
   async (item, thunkAPI) => {
     const { rejectWithValue, getState } = thunkAPI;
-    const auth = getState();
-    console.log(item);
+    const { auth } = getState();
     item.userId = auth.id;
+
     try {
       const response = await fetch(`http://localhost:3005/posts`, {
         method: "POST",
         body: JSON.stringify(item),
         headers: {
-          Accept: "application.json",
-          "Content-Type": "application/json; charset=utf-8",
+          "Content-type": "application/json; charset=UTF-8",
         },
       });
       const data = await response.json();

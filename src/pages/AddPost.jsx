@@ -3,19 +3,31 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { insertPost } from "../state/postSlice";
 import { useDispatch } from "react-redux";
+//useNavigate
+import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
+  const navigate = useNavigate();
   //states
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   //disption
-  const dispation = useDispatch();
+  const dispatch = useDispatch();
+  //navigate when submt
 
   //Handle Forms
   const handleForm = (e) => {
     e.preventDefault();
     const id = Math.floor(Math.random() * 500);
-    dispation(insertPost({ title, description, id }));
+    dispatch(insertPost({ id, title, description }))
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <Form onSubmit={handleForm}>

@@ -7,21 +7,24 @@ export const PostListItem = ({ data, deleteRecords }) => {
       deleteRecords(id);
     }
   };
-  const records = data.map((el, idx) => (
-    <tr key={el.id}>
-      <td>#{++idx}</td>
-      <td>{el.title}</td>
-      <td>
-        <ButtonGroup aria-label="Basic example">
-          <Button variant="success">Edit</Button>
-          <Button variant="danger" onClick={(id) => handleDelete(el.id)}>
-            Delete
-          </Button>
-        </ButtonGroup>
-      </td>
-    </tr>
-  ));
-  return <>{records}</>;
+  if (data.length > 0) {
+    const records = data.map((el, idx) => (
+      <tr key={el.id}>
+        <td>#{++idx}</td>
+        <td>{el.title}</td>
+        <td>{el.description}</td>
+        <td>
+          <ButtonGroup aria-label="Basic example">
+            <Button variant="success">Edit</Button>
+            <Button variant="danger" onClick={() => handleDelete(el.id)}>
+              Delete
+            </Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    ));
+    return <>{records}</>;
+  }
 };
 
 export default memo(PostListItem);
