@@ -81,8 +81,17 @@ const postSlice = createSlice({
       state.error = action.payload;
     },
     //insert post types of status
+    [insertPost.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
     [insertPost.fulfilled]: (state, action) => {
+      state.loading = false;
       state.records = action.payload;
+    },
+    [insertPost.rejected]: (state, action) => {
+      state.loading = false;
+      action.error = action.payload;
     },
   },
 });

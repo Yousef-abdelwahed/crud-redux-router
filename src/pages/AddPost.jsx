@@ -11,6 +11,7 @@ const AddPost = () => {
   //disption
   const dispation = useDispatch();
 
+  //Handle Forms
   const handleForm = (e) => {
     e.preventDefault();
     const id = Math.floor(Math.random() * 500);
@@ -22,7 +23,7 @@ const AddPost = () => {
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
-          placeholder="name@example.com"
+          // placeholder=""
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
