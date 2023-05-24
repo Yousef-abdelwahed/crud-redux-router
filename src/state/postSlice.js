@@ -14,6 +14,7 @@ export const fetchPosts = createAsyncThunk(
     }
   }
 );
+//Delete
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
   async (id, thunkAPI) => {
@@ -26,7 +27,27 @@ export const deletePost = createAsyncThunk(
     }
   }
 );
-//
+//insert
+export const insertPost = createAsyncThunk(
+  "posts/insertPost",
+  async (item, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const response = await fetch(`http://localhost:3005/posts`, {
+        method: "POST",
+        body: JSON.stringify(item),
+        headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 const initialState = { records: [], loading: false, error: null };
 const postSlice = createSlice({
   name: "posts",
@@ -58,6 +79,10 @@ const postSlice = createSlice({
     [deletePost.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    //insert post types of status
+    [insertPost.fulfilled]: (state, action) => {
+      state.records = action.payload;
     },
   },
 });
