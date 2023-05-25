@@ -50,8 +50,8 @@ const AddPost = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-      </Form.Group>
       <Loading loading={loading} error={error}></Loading>
+      </Form.Group>
 
       <Button variant="primary" type="submit" disabled={loading}>
         Submit
