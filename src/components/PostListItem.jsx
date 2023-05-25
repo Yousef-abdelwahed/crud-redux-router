@@ -1,10 +1,9 @@
 import React, { memo } from "react";
 import { ButtonGroup, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const PostListItem = ({ data, deleteRecords }) => {
   // nav
-  const navigate = useNavigate();
   const handleDelete = (id) => {
     if (window.confirm("Do you really want to leave?")) {
       deleteRecords(id);
