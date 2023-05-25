@@ -27,9 +27,8 @@ const AddPost = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
-      })
-      .catch((error) => console.log(error));
+        <Loading error={error} />;
+      });
   };
   return (
     <Form onSubmit={handleForm}>
@@ -39,6 +38,7 @@ const AddPost = () => {
           type="text"
           // placeholder=""
           value={title}
+          required
           onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
@@ -46,16 +46,17 @@ const AddPost = () => {
         <Form.Label>Description</Form.Label>
         <Form.Control
           as="textarea"
+          required
           rows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-      <Loading loading={loading} error={error}></Loading>
       </Form.Group>
-
-      <Button variant="primary" type="submit" disabled={loading}>
-        Submit
-      </Button>
+      <Loading loading={loading} error={error}>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Loading>
     </Form>
   );
 };

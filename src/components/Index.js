@@ -16,11 +16,13 @@ const Index = () => {
     [dispatch]
   );
   return (
-    <Loading loading={loading} error={error}>
-      <PostList>
-        <PostListItem data={records} deleteRecords={deleteRecords} />
-      </PostList>
-    </Loading>
+    <>
+      <Loading loading={loading} error={error}>
+        <PostList>
+          <PostListItem data={records} deleteRecords={deleteRecords} />
+        </PostList>
+      </Loading>
+    </>
   );
 };
 

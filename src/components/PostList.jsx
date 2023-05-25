@@ -12,10 +12,7 @@ const PostList = ({ children }) => {
           <th style={{ width: "10%" }}></th>
         </tr>
       </thead>
-      <tbody>
-        {/* <PostListItem data={data} /> */}
-        {children}
-      </tbody>
+      <tbody>{children}</tbody>
     </Table>
   );
 };

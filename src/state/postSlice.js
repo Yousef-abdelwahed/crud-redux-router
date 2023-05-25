@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 //fetch post
-export const fetchPost = createAsyncThunk(
-  "posts/fetchPost",
+export const getDetal = createAsyncThunk(
+  "posts/getDetal",
   async (id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -67,23 +67,23 @@ export const insertPost = createAsyncThunk(
     }
   }
 );
-const initialState = { records: [], loading: true, error: null, record: null };
+const initialState = { records: [], loading: false, error: null, record: null };
 const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {},
   extraReducers: {
     //Fetch post
-    [fetchPost.pending]: (state) => {
+    [getDetal.pending]: (state) => {
       state.loading = true;
       state.error = null;
       state.record = null;
     },
-    [fetchPost.fulfilled]: (state, action) => {
+    [getDetal.fulfilled]: (state, action) => {
       state.loading = false;
       state.record = action.payload;
     },
-    [fetchPost.rejected]: (state, action) => {
+    [getDetal.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -125,7 +125,7 @@ const postSlice = createSlice({
     },
     [insertPost.rejected]: (state, action) => {
       state.loading = false;
-      action.error = action.payload;
+      state.error = action.payload;
     },
   },
 });
