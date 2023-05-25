@@ -6,8 +6,10 @@ export const getDetal = createAsyncThunk(
   async (id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch(`http://localhost:5000/posts/${id}`);
-      const data = await res.json();
+      const response = await fetch(`http://localhost:3005/posts/${id}`, {
+        method: "GET",
+      });
+      const data = await response.json();
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -82,12 +84,13 @@ const postSlice = createSlice({
     [getDetal.fulfilled]: (state, action) => {
       state.loading = false;
       state.record = action.payload;
+      console.log(action.payload);
     },
     [getDetal.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
-    //
+
     [fetchPosts.pending]: (state) => {
       state.loading = true;
       state.error = null;
