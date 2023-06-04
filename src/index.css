@@ -8,7 +8,7 @@ a.active {
     border-color 0.15s ease-in-out;
 }
 a {
-  color: black !important;
-  text-decoration: none !important;
   padding: 0.5em;
+}
+.title {
 }

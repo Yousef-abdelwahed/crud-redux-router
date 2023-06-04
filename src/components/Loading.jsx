@@ -1,7 +1,6 @@
 import React, { cloneElement } from "react";
 
 const Loading = ({ loading, error = "falid", children }) => {
-  // console.log(children);
   const elementType = children?.type?.render?.displayName;
   const renderHandler = () => {
     if (elementType === "Button") {

@@ -35,7 +35,7 @@ const AddPost = () => {
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <Form.Label>Title</Form.Label>
         <Form.Control
-          type="email"
+          type="text"
           // placeholder=""
           value={title}
           required

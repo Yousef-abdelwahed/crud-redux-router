@@ -69,6 +69,26 @@ export const insertPost = createAsyncThunk(
     }
   }
 );
+//editPost
+export const editPost = createAsyncThunk(
+  "posts/editPost",
+  async (item, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const response = await fetch(`http://localhost:3005/posts/${item.id}`, {
+        method: "PATCH",
+        body: JSON.stringify(item),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 const initialState = { records: [], loading: false, error: null, record: null };
 const postSlice = createSlice({
   name: "posts",
@@ -76,20 +96,6 @@ const postSlice = createSlice({
   reducers: {},
   extraReducers: {
     //Fetch post
-    [getDetal.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-      state.record = null;
-    },
-    [getDetal.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.record = action.payload;
-      console.log(action.payload);
-    },
-    [getDetal.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
 
     [fetchPosts.pending]: (state) => {
       state.loading = true;
@@ -101,6 +107,33 @@ const postSlice = createSlice({
       // state.records.push(action.payload);
     },
     [fetchPosts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    //Edit post
+    [editPost.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [editPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.record = action.payload;
+    },
+    [editPost.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    //get details
+    [getDetal.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+      state.record = null;
+    },
+    [getDetal.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.record = action.payload;
+    },
+    [getDetal.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
