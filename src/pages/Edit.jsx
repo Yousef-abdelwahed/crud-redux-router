@@ -18,6 +18,9 @@ const Edit = () => {
       setDescription(record?.description);
     }
   }, [record]);
+  useEffect(() => {
+    return () => dispatch({ type: "post/cleanRecord" });
+  }, [dispatch]);
   const handleForm = (e) => {
     e.preventDefault();
     dispatch(editPost({ id: record.id, title, description }))

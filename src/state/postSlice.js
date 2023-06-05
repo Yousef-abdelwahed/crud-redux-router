@@ -93,7 +93,11 @@ const initialState = { records: [], loading: false, error: null, record: null };
 const postSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    cleanRecord: (state) => {
+      state.record = null;
+    },
+  },
   extraReducers: {
     //Fetch post
 
