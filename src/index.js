@@ -12,8 +12,6 @@ import Index from "./components/Index";
 import ErrorPage from "./pages/ErrorPage";
 import { Provider } from "react-redux";
 import store from "./state/store";
-import ProtectedRoute from "./components/ProtectedRoute";
-
 const paramHandler = ({ params }) => {
   if (isNaN(params.id)) {
     throw new Response("Bad request", {
@@ -34,11 +32,7 @@ const router = createBrowserRouter([
 
       {
         path: "/post/add",
-        element: (
-          <ProtectedRoute>
-            <AddPost />
-          </ProtectedRoute>
-        ),
+        element: <AddPost />,
       },
       { path: "/post/:id/edit", element: <Edit />, loader: paramHandler },
       {

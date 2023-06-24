@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 //useNavigate
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import { withGurd } from "../util/withGurd";
 
 const AddPost = () => {
   const navigate = useNavigate();
@@ -61,4 +62,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default withGurd(AddPost);
